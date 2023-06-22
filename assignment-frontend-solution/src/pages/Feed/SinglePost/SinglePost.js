@@ -26,14 +26,16 @@ class SinglePost extends Component {
         return res.json();
       })
       .then(resData => {
+        const image = `http://localhost:8080/${resData.post.imageUrl.replace(/\\/g,'/')}`;
         this.setState({
           title: resData.post.title,
           author: resData.post.creator.name,
-          image: 'http://localhost:8080/' + resData.post.imageUrl,
+          image: image,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
           content: resData.post.content
         });
       })
+      
       .catch(err => {
         console.log(err);
       });
